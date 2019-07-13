@@ -50,13 +50,16 @@ function onConnectionLost(responseObject) {
 
 // Called when a message arrives
 function onMessageArrived(message) {
+    var data = message.payloadString.split(',');
     var today = new Date();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    console.log("onMessageArrived: " + message.payloadString);
-    document.getElementById("messages").innerHTML = '<h3>'+ message.payloadString+'</h3>';
+    console.log("onMessageArrived: " + data[0] + " and " +data[1]);
+    document.getElementById("messages").innerHTML = '<h3>'+ data[0] +'</h3>';
+    document.getElementById("messages1").innerHTML = '<h3>'+ data[1] +'</h3>';
     document.getElementById("waktunow").innerHTML = '<p>'+ date +' '+ time +'</p>';
-    addData(time, message.payloadString);
+    addData(time, data[0]);
+    addData1(time, data[1]);
 }
 
 // Called when the disconnection button is pressed
@@ -70,3 +73,5 @@ function updateScroll() {
     var element = document.getElementById("messages");
     element.scrollTop = element.scrollHeight;
 }
+
+

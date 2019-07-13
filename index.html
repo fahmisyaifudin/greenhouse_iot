@@ -25,7 +25,7 @@
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
-  <script src="main.js" type="text/javascript"></script>
+  <script src="main.js?2" type="text/javascript"></script>
 </head>
 
 <body class="body-bg">
@@ -85,6 +85,7 @@
                             <div class="card-body">
                                 <h4 class="header-title">Grafik</h4>
                                 <canvas id="myChart"></canvas>
+                                 <canvas id="myChart1"></canvas>
                             </div>
                         </div>
                     </div>
@@ -96,6 +97,10 @@
                                 <h4 class="header-title">Kelembapan</h4>
                                 <br>
                                 <div id="messages" class="text-center"></div>
+                                <h4 class="header-title">Suhu</h4>
+                                <br>
+                                <div id="messages1" class="text-center"></div>
+                                <br>
                                 <p>Last time scanning : </p>
                                 <div id="waktunow" class="text-center"></div>
                                 <br>
@@ -321,6 +326,28 @@ var chart = new Chart(ctx, {
     options: {}
 });
 
+var ctx1 = document.getElementById('myChart1').getContext('2d');
+var chart1 = new Chart(ctx1, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Suhu',
+            backgroundColor: 'rgb(99, 180, 255)',
+            borderColor: 'rgb(99, 180, 255)',
+             fill: false,
+            data: []
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+
 function addData(month, messages) {
             if (chart.data.datasets.length > 0) {
                 chart.data.labels.push(month);
@@ -330,6 +357,17 @@ function addData(month, messages) {
                 });
 
                 chart.update();
+            }
+        };
+function addData1(month, messages) {
+            if (chart1.data.datasets.length > 0) {
+                chart1.data.labels.push(month);
+
+                chart1.data.datasets.forEach(function(dataset) {
+                    dataset.data.push(messages);
+                });
+
+                chart1.update();
             }
         };
 
