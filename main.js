@@ -58,8 +58,14 @@ function onMessageArrived(message) {
     document.getElementById("messages").innerHTML = '<h3>'+ data[0] +'</h3>';
     document.getElementById("messages1").innerHTML = '<h3>'+ data[1] +'</h3>';
     document.getElementById("waktunow").innerHTML = '<p>'+ date +' '+ time +'</p>';
+    sendData(data[0], data[1]);
     addData(time, data[0]);
     addData1(time, data[1]);
+}
+function sendData(kelembapan, suhu) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "prosesdata.php?kelembapan="+ kelembapan +"&suhu="+suhu, true);
+  xhttp.send();
 }
 
 // Called when the disconnection button is pressed
