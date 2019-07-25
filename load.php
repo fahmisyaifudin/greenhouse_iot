@@ -1,4 +1,4 @@
- <table class="table">
+ <table id="myTable" class="display table">
   <thead class="thead-light">
     <tr>
       <th scope="col">Waktu</th>
